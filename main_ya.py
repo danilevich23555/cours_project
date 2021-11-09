@@ -6,6 +6,9 @@ import requests
 from ya_disk import YandexDisk
 import time
 import progressbar
+import os
+path = os.path.join(os.getcwd(), 'test.json')
+import json
 
 
 
@@ -34,14 +37,19 @@ quntity_foto = (len((resp.json()['response']['items'])))
 # # _____________________________количество лайков_________________________
 # pprint((resp.json()['response']['items'][0]['likes']['count']))
 temp = []
+log = []
 for foto in range(quntity_foto):
     url = (resp.json()['response']['items'][foto])['sizes'][-1]['url']
     like = (resp.json()['response']['items'][foto]['likes']['count'])
+    size = (resp.json()['response']['items'][0])['sizes'][-1]['type']
     temp.append({'url': url, 'like': like})
-
+    log.append({'file name': like, 'size': size})
 
 
 if __name__ == '__main__':
     ya = YandexDisk(token=token_ya)
     ya.upload_file_to_disk(temp)
+    with open(path, 'w') as data:
+        json.dump(log, data)
+
 

@@ -1,9 +1,5 @@
-from pprint import pprint
 import datetime
-
-
 import requests
-import time
 import progressbar
 
 class YandexDisk:
@@ -30,5 +26,5 @@ class YandexDisk:
                 params = {"url": url, "path": disk_file_path}
                 headers = self.get_headers()
                 response = requests.post(upload_url, params=params, headers=headers)
-        print(f'{now.strftime("%d-%m-%Y %H:%M:%S")} загружено {int(quantity)} фото на Яндекс диск')
-
+        print(f'{now.strftime("%d-%m-%Y %H:%M:%S")} загружено {int(quantity)} фото на Яндекс диск.')
+        input("")
